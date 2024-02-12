@@ -1,0 +1,14 @@
+version: "3.9" # Providng version
+
+services:
+  app:
+    build:
+      context: . # tells to use current directory(.) for build
+      args:
+        - DEV=true
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
