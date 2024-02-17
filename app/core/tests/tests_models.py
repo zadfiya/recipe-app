@@ -4,7 +4,6 @@ Tests for models that are used by recipe app.
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
-
 class ModelTests(TestCase):
     """Test models."""
 
