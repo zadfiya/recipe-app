@@ -10,12 +10,22 @@ from django.contrib.auth.models import (
 
 class UserManager(BaseUserManager):
     """Manager for users."""
-    if not email:
-        raise ValueError("Email must provide to create a user")
     def create_user(self, email, password=None, **extra_fields):
         """Create, save and return a new user."""
+        if not email:
+            raise ValueError("Email must provide to create a user")
         user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
+        user.save(using=self._db)
+
+        return user
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        """Create, save and return a super user."""
+        user = self.model(email=self.normalize_email(email), **extra_fields)
+        user.set_password(password)
+        user.is_superuser = True
+        user.is_staff = True
         user.save(using=self._db)
 
         return user
