@@ -10,7 +10,8 @@ from django.contrib.auth.models import (
 
 class UserManager(BaseUserManager):
     """Manager for users."""
-
+    if not email:
+        raise ValueError("Email must provide to create a user")
     def create_user(self, email, password=None, **extra_fields):
         """Create, save and return a new user."""
         user = self.model(email=self.normalize_email(email), **extra_fields)
