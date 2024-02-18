@@ -4,6 +4,7 @@ Tests for models that are used by recipe app.
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
+
 class ModelTests(TestCase):
     """Test models."""
 
@@ -30,7 +31,7 @@ class ModelTests(TestCase):
         for email, expected in sample_emails:
             user = get_user_model().objects.create_user(email, 'sample123')
             self.assertEqual(user.email, expected)
-    
+
     def test_create_super_user(self):
         """Testing by creating a super user with an email is successful."""
         email = 'admin@example.com'
