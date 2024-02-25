@@ -3,7 +3,7 @@ Tests for models that are used by recipe app.
 """
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-from Decimal import decimal
+from decimal import Decimal
 from core import models
 
 class ModelTests(TestCase):
