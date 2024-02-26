@@ -33,3 +33,16 @@ def create_recipe(user, **params):
     return recipe
 
 
+class PublicRecipeAPITests(TestCase):
+    """Test unauthenticated API requests."""
+
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_auth_required(self):
+        """Test auth is required to call API."""
+        res = self.client.get(RECIPES_URL)
+
+        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
