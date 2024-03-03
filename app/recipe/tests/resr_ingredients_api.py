@@ -81,7 +81,7 @@ class PrivateIngredientsApiTests(TestCase):
         ingredient.refresh_from_db()
         self.assertEqual(ingredient.name, payload['name'])
 
-     def test_delete_ingredient(self):
+    def test_delete_ingredient(self):
         """Test deleting an ingredient."""
         ingredient = Ingredient.objects.create(user=self.user, name='Lettuce')
 
