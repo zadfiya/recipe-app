@@ -66,6 +66,7 @@ class PublicUserApiTests(TestCase):
         ).exists()
         self.assertFalse(user_exists)
 
+
 class PrivateUserApiTests(TestCase):
     """Test API requests that require authentication."""
 
