@@ -378,11 +378,9 @@ class PrivateRecipeApiTests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(recipe.ingredients.count(), 0)
-    
 
     class ImageUploadTests(TestCase):
         """Tests for the image upload API."""
-
         def setUp(self):
             self.client = APIClient()
             self.user = get_user_model().objects.create_user(
