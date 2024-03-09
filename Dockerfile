@@ -5,6 +5,7 @@ ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements.dev.txt /tmp/requirements.dev.txt
+COPY ./scripts /scripts
 COPY ./app /app
 WORKDIR /app
 EXPOSE 8000
@@ -15,7 +16,7 @@ RUN python -m venv /py && \
     /py/bin/pip install -r /tmp/requirements.txt && \
     apk add --update --no-cache postgresql-client jpeg-dev  && \
     apk add --update --no-cache --virtual .tmp-build-deps \
-        build-base postgresql-dev musl-dev zlib zlib-dev && \
+        build-base postgresql-dev musl-dev zlib zlib-dev linux-headers && \
     if [ $DEV = "true" ]; \
         then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
     fi && \
@@ -30,7 +31,9 @@ RUN python -m venv /py && \
     chown -R django-user:django-user /vol && \
     chmod -R 755 /vol
 
-ENV PATH="/py/bin:$PATH"
+ENV PATH="/scripts:/py/bin:$PATH"
 
 # Creating a new user that operates on our image, has a less access than root user that makes application more secure
 USER django-user
+
+CMD ["run.sh"]
