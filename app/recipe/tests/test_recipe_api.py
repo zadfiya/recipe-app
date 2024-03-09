@@ -379,8 +379,9 @@ class PrivateRecipeApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(recipe.ingredients.count(), 0)
     
+
     class ImageUploadTests(TestCase):
-    """Tests for the image upload API."""
+        """Tests for the image upload API."""
 
         def setUp(self):
             self.client = APIClient()
@@ -395,7 +396,7 @@ class PrivateRecipeApiTests(TestCase):
             self.recipe.image.delete()
 
         def test_upload_image(self):
-        """Test uploading an image to a recipe."""
+            """Test uploading an image to a recipe."""
             url = image_upload_url(self.recipe.id)
             with tempfile.NamedTemporaryFile(suffix='.jpg') as image_file:
                 img = Image.new('RGB', (10, 10))
@@ -408,9 +409,9 @@ class PrivateRecipeApiTests(TestCase):
             self.assertEqual(res.status_code, status.HTTP_200_OK)
             self.assertIn('image', res.data)
             self.assertTrue(os.path.exists(self.recipe.image.path))
-        
+
         def test_upload_image_bad_request(self):
-        """Test uploading an invalid image."""
+            """Test uploading an invalid image."""
             url = image_upload_url(self.recipe.id)
             payload = {'image': 'notanimage'}
             res = self.client.post(url, payload, format='multipart')
@@ -418,7 +419,7 @@ class PrivateRecipeApiTests(TestCase):
             self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
 
         def test_filter_by_tags(self):
-        """Test filtering recipes by tags."""
+            """Test filtering recipes by tags."""
             r1 = create_recipe(user=self.user, title='Thai Vegetable Curry')
             r2 = create_recipe(user=self.user, title='Aubergine with Tahini')
             tag1 = Tag.objects.create(user=self.user, name='Vegan')
@@ -438,7 +439,7 @@ class PrivateRecipeApiTests(TestCase):
             self.assertNotIn(s3.data, res.data)
 
         def test_filter_by_ingredients(self):
-        """Test filtering recipes by ingredients."""
+            """Test filtering recipes by ingredients."""
             r1 = create_recipe(user=self.user, title='Posh Beans on Toast')
             r2 = create_recipe(user=self.user, title='Chicken Cacciatore')
             in1 = Ingredient.objects.create(user=self.user, name='Feta Cheese')

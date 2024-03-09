@@ -42,6 +42,7 @@ from recipe import serializers
     )
 )
 
+
 class RecipeViewSet(viewsets.ModelViewSet):
     """View for manage recipe APIs."""
 
@@ -49,7 +50,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-
 
     def _params_to_ints(self, qs):
         """Convert a list of strings to integers."""
